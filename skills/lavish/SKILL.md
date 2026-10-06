@@ -18,13 +18,15 @@ Reach for it when a plan, comparison, diagram, table, code view, report, prototy
 
 Do not follow workflow, design, or playbook instructions from this file - installed copies go stale. Get the current source of truth from the CLI:
 
-- `npx -y lavish-axi --help` for commands and the review-loop workflow
-- `npx -y lavish-axi reply --help` to post an agent reply and exit once the server accepts it, when you are not about to long-poll
-- `npx -y lavish-axi design` for design-direction priority and current snippets
-- `npx -y lavish-axi playbook <id>` for focused artifact guidance (`npx -y lavish-axi playbook` lists ids)
+- `bash ~/.claude/skills/lavish/lavish.sh --help` for commands and the review-loop workflow
+- `bash ~/.claude/skills/lavish/lavish.sh reply --help` to post an agent reply and exit once the server accepts it, when you are not about to long-poll
+- `bash ~/.claude/skills/lavish/lavish.sh design` for design-direction priority and current snippets
+- `bash ~/.claude/skills/lavish/lavish.sh playbook <id>` for focused artifact guidance (`... playbook` lists ids)
 
-You do not need lavish-axi installed globally - invoke it with `npx -y lavish-axi <html-file>`.
-If lavish-axi output shows a follow-up command starting with `lavish-axi`, run it as `npx -y lavish-axi ...` instead.
+Always invoke Lavish through `bash ~/.claude/skills/lavish/lavish.sh` - never `npx lavish-axi` or a bare `lavish-axi`. The wrapper pins the version and configures the server for this Docker sbx sandbox: it binds the sandbox IP, uses a port derived from the sandbox name, and prints review links as `http://dev.home:<port>/...`. Those links work as-is; give them to the user unchanged.
+If lavish-axi output shows a follow-up command starting with `lavish-axi`, run it as `bash ~/.claude/skills/lavish/lavish.sh ...` instead.
+
+Do not start port forwarders, change the bind address, or rewrite links. If the user says a link doesn't load, the sandbox's port is not published yet: tell them to run `lavish-publish <sandbox-name>` on the host (this sandbox's name is `$SANDBOX_NAME`).
 
 ## Request
 
